@@ -3,11 +3,22 @@
 </template>
 <script lang="ts" setup>
 import Catalog from '../../../components/comment/Catalog.vue';
+import { reqHostpitalLevelAndRegion } from '@/api/home/index.ts';
+import { 
+    HospitalLevelAndRegionArr,
+    HospitalLevelAndRegionResponseData
+} from '@/api/home/type.ts';
+import { ref } from 'vue';
 
 const title = '地区'
-const list = [
-    '全部', '南山区', '福田区', '罗湖区', '宝安区',
-    '龙华区', '龙岗区', '光明区', '坪山区', '大鹏新区',
-    '金华区', '雄安区', '海淀区', '岳阳楼区', '岳麓区'
-    ]
+const list = ref<HospitalLevelAndRegionArr>([]);
+
+//获取地区数据
+const getLevel = async () => {
+    const result: HospitalLevelAndRegionResponseData = await reqHostpitalLevelAndRegion('Beijin');
+    if(result.code === 200) {
+        list.value = result.data;
+    }
+}
+getLevel();
 </script>

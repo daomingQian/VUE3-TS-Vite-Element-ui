@@ -6,8 +6,11 @@
             </el-col>
             <el-col :span="23"><div class="grid-content ep-bg-purple" />
                 <ul class="list">
-                    <li v-for="(item, index) in list" :key="item" :class="{activity: index === 0}">
-                        <span>{{ item }}</span>
+                    <li :class="{activity: index === 0}" @click="handle(0)">
+                        <span>全部</span>
+                    </li>
+                    <li v-for="item in list" :key="item.id" :class="{activity: index === item.id}" @click="handle(item.id)">
+                        <span>{{ item.name }}</span>
                     </li>
                 </ul>
             </el-col>
@@ -16,10 +19,16 @@
 </template>
 
 <script lang="ts" setup>
+import { HospitalLevelAndRegionArr } from '@/api/home/type.ts';
+import { ref } from 'vue';
 defineProps<{
     title?: String
-    list?: string[]
+    list?: HospitalLevelAndRegionArr
 }>()
+const index = ref(0);
+const handle = (id: number) => {
+    index.value = id;
+}
 </script>
 <style lang="scss" scoped>
 .container {
