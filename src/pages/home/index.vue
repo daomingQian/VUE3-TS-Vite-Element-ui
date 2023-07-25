@@ -7,7 +7,6 @@
                 <Level/>
                 <Region/>
                 <CardList/>
-                <Pagination/>
             </el-col>
             <el-col :span="6"><div class="grid-content ep-bg-purple" />
             
@@ -22,7 +21,8 @@ import Search from "./Search/index.vue";
 import Level from './Level/index.vue'
 import Region from './Region/index.vue'
 import CardList from './CardList/index.vue'
-import Pagination from './Pagination/index.vue'
+
+
 </script>
 
 <style lang="scss" scoped>

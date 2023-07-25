@@ -1,9 +1,22 @@
 <template>
     <div class="container">
         <div v-for="item,index in cardList" :key="index" class="box">
-            <Card :title = "item.title" :level = "item.level" :time = "item.time" :url = "item.url"/>
+            <Card :content = "item"/>
         </div>
-        
+    </div>
+    <div class="demo-pagination-block">
+        <el-pagination
+        v-model:current-page="curPage"
+        v-model:page-size="pageSize"
+        :page-sizes="[5, 10, 20, 30, 40]"
+        :small="small"
+        :disabled="disabled"
+        :background="background"
+        layout="prev, pager, next, jumper, ->,  sizes, total"
+        :total="total"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        />
     </div>
 </template>
 
@@ -11,28 +24,26 @@
 import Card from '@/components/comment/Card.vue';
 import { reqHostpital } from '@/api/home/index.ts';
 import { ref } from 'vue';
+const cardList = ref([]);
 
-const cardList = ref([])
+const small = ref(false)
+const background = ref(true)
+const disabled = ref(false)
 const curPage = ref<number>(1);
 const pageSize = ref<number>(10);
+const total = ref(10)
 const getHospitalInfo = async (curPage: number, pageSize: number) => {
     const result = await reqHostpital(curPage, pageSize);
-    console.log(result);;
+    total.value = result.data.totalElements;
+    cardList.value = result.data.content;
 }
 getHospitalInfo(curPage.value, pageSize.value);
-// reqHostpital(1, 10).then(res => {
-//     console.log(res);
-//     console.log(res.data.content);
-    
-//     for(const obj of res.data.content) {
-//         cardList.push({
-//             title: obj.hosname,
-//             level: obj.param.hostypeString,
-//             time: obj.createTime,
-//             url: obj.hosname,
-//         })
-//     }
-// })
+const handleSizeChange = (val: number) => {
+    getHospitalInfo(curPage.value, val);
+}
+const handleCurrentChange = (val: number) => {
+    getHospitalInfo(val, pageSize.value);
+}
 </script>
 
 <style lang="scss" scoped>
@@ -43,5 +54,8 @@ getHospitalInfo(curPage.value, pageSize.value);
     .box {
         margin-bottom: 10px;
     }
+}
+.demo-pagination-block{
+    margin-bottom: 10px;
 }
 </style>
