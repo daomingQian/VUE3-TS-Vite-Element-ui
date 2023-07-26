@@ -6,10 +6,10 @@
             </el-col>
             <el-col :span="23"><div class="grid-content ep-bg-purple" />
                 <ul class="list">
-                    <li :class="{activity: index === 0}" @click="handle(0)">
+                    <li :class="{activity: index === ''}" @click="handle('')">
                         <span>全部</span>
                     </li>
-                    <li v-for="item in list" :key="item.id" :class="{activity: index === item.id}" @click="handle(item.id)">
+                    <li v-for="item in list" :key="item.value" :class="{activity: index === item.value}" @click="handle(item.value)">
                         <span>{{ item.name }}</span>
                     </li>
                 </ul>
@@ -20,15 +20,20 @@
 
 <script lang="ts" setup>
 import { HospitalLevelAndRegionArr } from '@/api/home/type.ts';
+import emitter from '@/api/home/message.ts';
 import { ref } from 'vue';
-defineProps<{
+
+const props = defineProps<{
     title?: String
     list?: HospitalLevelAndRegionArr
 }>()
-const index = ref(0);
-const handle = (id: number) => {
-    index.value = id;
+const index = ref('');
+const handle = (value: string) => {
+    index.value = value;
+    emitter.emit('selectLevelORRegion', {title: props.title, value})
 }
+
+
 </script>
 <style lang="scss" scoped>
 .container {

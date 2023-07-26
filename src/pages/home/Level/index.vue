@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import Catalog from '@/components/comment/Catalog.vue';
 import { reqHostpitalLevelAndRegion } from '@/api/home/index.ts';
-import { HospitalLevelAndRegionArr } from '@/api/home/type.ts';
+import { HospitalLevelAndRegionArr, HospitalLevelAndRegionResponseData } from '@/api/home/type.ts';
 import { ref } from 'vue';
 
 const title = '等级'
@@ -15,8 +15,10 @@ const list = ref<HospitalLevelAndRegionArr>([]);
 
 //获取医院等级数据
 const getLevel = async () => {
-    const result = await reqHostpitalLevelAndRegion('HosType');
-    list.value = result.data;
+    const result:HospitalLevelAndRegionResponseData = await reqHostpitalLevelAndRegion('HosType');
+    if(result.code === 200) {
+        list.value = result.data;
+    }
 }
 getLevel();
 </script>

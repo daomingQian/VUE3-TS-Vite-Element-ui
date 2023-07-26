@@ -12,6 +12,7 @@
     "@element-plus/icons-vue": "^2.1.0",
     "axios": "^1.4.0",
     "element-plus": "^2.3.8",
+    "mitt": "^3.0.1",
     "sass": "^1.64.0",
     "scss": "^0.2.4",
     "vue": "^3.3.4",

@@ -4,10 +4,7 @@
 <script lang="ts" setup>
 import Catalog from '../../../components/comment/Catalog.vue';
 import { reqHostpitalLevelAndRegion } from '@/api/home/index.ts';
-import { 
-    HospitalLevelAndRegionArr,
-    HospitalLevelAndRegionResponseData
-} from '@/api/home/type.ts';
+import { HospitalLevelAndRegionArr, HospitalLevelAndRegionResponseData } from '@/api/home/type.ts';
 import { ref } from 'vue';
 
 const title = '地区'

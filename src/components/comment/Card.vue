@@ -30,7 +30,7 @@ width: 440px;
         display: flex;
         justify-content: space-between;
         .left {
-            width: 200px;
+            width: 250px;
             .box {
                 display: flex;
                 justify-content: space-between;
@@ -49,6 +49,7 @@ width: 440px;
         .right {
             .img {
                 width: 100px;
+                height: 100px;
             }
         }
     }

@@ -31,7 +31,8 @@ export interface HospitalResponseData extends ResponseData {
                 "unsorted": boolean,
                 "empty": boolean
             }
-        }
+        },
+        'totalElements': number
     }
 }
 
